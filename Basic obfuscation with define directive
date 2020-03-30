@@ -1,0 +1,14 @@
+Below is our header file -
+#define f for(i=0;i<5;i++)
+
+With the .c file being as below:
+#include <stdio.h>
+#include "obfus_define.h"
+
+int main(){
+        int i;
+        f{printf("Hello");};
+        return 0;
+}
+
+If we hid the header file an outsider wouldn't know what to make of this, or even that the printf command is being executed 5 times. Of course if they compile it they'll understand - but this is the basic obfuscation.
