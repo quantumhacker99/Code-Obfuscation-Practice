@@ -1,0 +1,64 @@
+The obfuscated code was found as follows-
+#include <stdio.h>
+unsigned char w,h,i,l,e,x,y=10,z=10,E[256];
+#define whi1e(j,k)  printf(j,k); fflush(stdout)
+#define o E[w]
+
+main	(c,v)	char *v[]; {
+while	(c>=2	){z = atoi(v[1]),--c;
+while 	(c>=2	)y = atoi(v[2]),--c;}
+whi1e	("%s"	,"2.");
+while	(--y)	--x;
+while	(--x)	--e,--y;
+while	(--z)	--x;
+while	(--x)	--e,--z;
+while	(--w)	{
+while	(--x)	--o;}
+while	(--z)	{
+while	(--x)	--w;
+while	(--o)	;
+while	(--w)	;
+while	(--e)	--x;
+while	(--x)	--w,--e;
+while	(--w)	{
+while	(--l)	;
+while	(--i)	--l;--l;
+while	(--h)	;
+while	(--y)	--x;
+while	(--x)	--h,--y;
+while	(--x)	--h;
+while	(--h)	{
+while	(--o)	--x;
+while	(--x)	--l,--o;
+while	(l>=w	){--i;
+while	(--w)	--l,--x;
+while	(--x)	--w;--l;}}
+while	(--o)	;
+while	(--l)	--x;
+while	(--x)	--o;}
+while	(--i)	--h;
+whi1e	("%x"	,--h);--e;}
+whi1e	("%s"	,"\n");}
+
+I first compiled with gcc to see the output, 2.2.718281828
+What I found is that we can write an int main first to make things clearer. Then I indented and whenever I found some
+statements on same line using commas to separate I made a new line. Basically I put each command on a new line.
+
+The first 2 while loops are redundant as well.They don't do anything as we are not passing a v as command line argument
+(at least I did not and I still got the correct e value). And v does not appear anywhere else. So we can replace 
+main definition to get int main() and not all the other complicated stuff.
+
+First it was confusing why some while statements were not coloured but then I realized that was a clever ploy to divert
+when I saw the define directive. That was whi1e and not while. To reduce confusion I made it a printf statement
+(which in fact is what it is) and simplified some more.
+
+x is not given a value. So it gets initialized to 0. We see the while (--y) --x loop. All it finally does is make y 0 and x 247. (Because 0-1 becomes 255, looping around, underflow). So I just initializedx and y to 247 and 0 and got rid of those loops.
+
+I saw later that though we could finally calculate everything and finally get it it would be like printing the output.
+You could instead of writing while (--y) --x, we could write x -= (y-1) and then y = 0. I used this simplification to cut down the while loop statements.
+One can see that h is the only variable to actually matter because it gets printed. The other ones are just for iteration. 
+And there is no computation involved. All we are doing is printing the value which we already knew. Like if we know e=2.7178 then we just print 2,., 7, 1, 7, 8 like that. Absolutely no algorithm involved.
+
+I also observed that one of the loops ( the while(--w) while(--x) --o loop) is only decrementing each element of the array so I replaced with a for loop to iterate through the E array.
+
+I did not simplify the statements further as I understood it was just this process and outputting each number mechanically. However it is this same process.
